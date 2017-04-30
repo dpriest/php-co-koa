@@ -7,6 +7,6 @@ Node.js在JS上开花结果，也许是浏览器的DOM事件模型培养起来�
 采纳为官方「异步编程标准规范」，从C#借鉴过来的[async/await](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/async_function)被纳入语言标准。
 
 因swoole与Node.js的I/O模型相同，PHPer有幸在高并发命题上遭遇与node一样的问题。Closure([RFC](https://wiki.php.net/rfc/closures?cm_mc_uid=26754990333314676210612&cm_mc_sid_50200000=1490031947))一定程度从语言本身改善了异步编程的体验，受限于Zend引擎作用域实现机制，PHP因缺失词法作用域从而缺失词法闭包，Closure对象采用了use语法来显式捕获upValue到静态属性的方式(closure->func.op_array.static_variables)，我个人认为这有点像无法自动实现闭包的匿名函数。之后Nikita Popov在PHP中实现了Generator([RFC](https://wiki.php.net/rfc/generators))，并且让PHPer意
-识到生成器原来可以实现实现非抢占任务调度([译文:在PHP中使用协程实现多任务调度](http://www.laruence.com/2015/05/28/3038.html))。我们最终可以借助于生成器实现半协程来解决该问题。
+识到生成器原来可以实现非抢占任务调度([译文:在PHP中使用协程实现多任务调度](http://www.laruence.com/2015/05/28/3038.html))。我们最终可以借助于生成器实现半协程来解决该问题。
 
 这篇文章秉承着造轮子的精神，我们从头实现一个全功能的基于生成器(Generator)的半协程调度器与相关基础组件，并基于该调度器实(chao)现(xi)JS社区当红的koa框架，最终加深我们对异步编程的理解。
